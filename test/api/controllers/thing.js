@@ -30,7 +30,6 @@ describe("controllers", function() {
               throw err;
             }
             var body = res.body;
-            console.log(body)
             body.should.have.property('id', 0);
             body.should.have.property('thing', thingHash);
             body.should.have.property('count', 0);
@@ -49,10 +48,27 @@ describe("controllers", function() {
               throw err;
             }
             var body = res.body;
-            console.log(body)
             body.should.have.property('count', 1);
             done();
           });
+      });
+    });
+
+    describe("GET /{thing}", function() {
+      it("Should return an accurate count for an existing Thing", function(done) {
+        request(baseUrl)
+          .get(thingHash)
+          .set('Accept', 'application/json')
+          .end(function(err, res) {
+            if (err) {
+              throw err;
+            }
+            var body = res.body;
+            body.should.have.property('id', 0);
+            body.should.have.property('thing', thingHash);
+            body.should.have.property('count', 1);
+            done();
+        });
       });
     });
 

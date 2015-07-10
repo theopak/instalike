@@ -1,4 +1,4 @@
-# Instalike
+# Instalike [![Build Status](https://travis-ci.org/theopak/instalike.svg?branch=master)](https://travis-ci.org/theopak/instalike) [![npm version](https://badge.fury.io/js/instalike.svg)](http://badge.fury.io/js/instalike)
 
 The like button for anything. Heavily inspired by http://ghbtns.com (Github Star counts). Use these attractive, globally-aware, anonymous like buttons to measure interest and hold informal polls.
 
@@ -7,15 +7,32 @@ The like button for anything. Heavily inspired by http://ghbtns.com (Github Star
 
 # Usage
 
-Simply drop the `<iframe>` in your HTML, and specify a hash to keep track of. Hashes are case-sensitive and can contain any Unicode characters.
+Simply drop the `<iframe>` in your HTML, and specify a `THING` to keep track of. Thing names are case-sensitive and can contain any Unicode characters.
 
 ```html
-<iframe src="btn.html?thing=HASH" frameborder="0" scrolling="0" width="140px" height="16px">
+<iframe src="//instalike.click/button/?thing=THING" frameborder="0" scrolling="0" width="140px" height="16px">
 </iframe>
 ```
 
+Please note that in this v0 release, **you must host the API yourself**.
+
 
 # Development
+
+The tech stack is very simple:
+
+- Backend (api)
+  - Node.js
+  - Express.js
+  - Swagger-Tools
+  - Mocha for testing
+  - Hosted on-prem
+- Frontend (buttons)
+  - Source is JS (zero external dependencies)
+  - Source is HTML + CSS3
+  - Uses FontAwesome icons
+  - Built by Gulp
+  - Hosted on gh-pages
 
 The `./public` directory contains all the source files:
 
