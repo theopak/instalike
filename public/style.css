@@ -1,0 +1,126 @@
+@font-face {
+  font-family: 'icons';
+  src:url('icons.eot?-l7r47a');
+  src:url('icons.eot?#iefix-l7r47a') format('embedded-opentype'),
+    url('icons.ttf?-l7r47a') format('truetype'),
+    url('icons.woff?-l7r47a') format('woff'),
+    url('icons.svg?-l7r47a#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font: normal 12px/1rem 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+
+::selection {
+  background: transparent;
+}
+
+#instalike {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 0 auto;
+  padding: 0 0.25rem;
+  height: 1rem;
+  line-height: 1rem;
+  vertical-align: baseline;
+  /*background: #fafafa;*/
+  /*border-radius: 0.25rem;*/
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#instalike--icon,
+#instalike--icon-liked,
+#instalike--label {
+  vertical-align: baseline;
+}
+
+#instalike--icon,
+#instalike--icon-liked {
+  position: absolute;
+  display: inline-block;
+  left: 0;
+  top: 0;
+  padding: 0;
+  padding-left: 0.1rem;
+  width: 2em;
+  font-size: 1.2em;
+  text-align: center;
+  color: #aaa;
+  z-index: 99;
+  transition: transform 250ms cubic-bezier(0.68, -.5, 0.265, 3), color 50ms ease-out;
+}
+
+
+#instalike:hover #instalike--icon {
+  color: #666;
+}
+
+#instalike:hover #instalike--icon-liked {
+  color: #cc1f00;
+}
+
+#instalike:active #instalike--icon,
+#instalike:active #instalike--icon-liked,
+#instalike--icon-liked {
+  color: tomato;
+}
+
+#instalike:active #instalike--icon,
+#instalike:active #instalike--icon-liked {
+  transform: scale(0.9);
+}
+
+#instalike--icon:before {
+  font-family: icons;
+  font-style: normal;
+  text-align: center;
+  content: '\e600';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#instalike--icon-liked:before {
+  font-family: icons;
+  font-style: normal;
+  text-align: center;
+  content: '\e601';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#instalike--label {
+  position: relative;
+  display: inline-block;
+  margin: 0.05rem 0 0.05rem 1.5rem;
+  padding: 0;
+  color: #333; /* #337ab7 */
+  line-height: 0.8rem;
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+#instalike--label-empty {
+  visibility: hidden;
+}
