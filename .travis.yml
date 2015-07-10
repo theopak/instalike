@@ -1,7 +1,15 @@
 sudo: false
 language: node_js
 node_js:
-  - '0.12.7'
+- 0.12.7
 install:
-  - npm install
-  - npm install -g gulp
+- npm install
+- npm install -g gulp
+deploy:
+  provider: npm
+  email: mail@theopak.com
+  api_key:
+    secure: GTxNI80TKhjymx6e/DtZMX/OJiOV3c0LyXduZAo5/BhheHJxKE8Tr+Wu5VJo5a5OpGTmPmwhrIXRWlj5FsFscX1dIXYMUDQnC4zEb/RT8L2hbowHUwymIU+N9Xag6PjcZR7HWUVevNbeFPuZ04S7Fecfno7Eb0qLFfYxI2kUi1HYioFoHjslx8M4xy7NIPf0nRMcgPKf5o+aV4yzsv8rZ2pylBwr93yqhkT3OLuFZy0h71quKQ0dlG0V0rb9SHo3nyxs9Xm0o06B959a1Dkljbp0r/+tbasyltYXU4EaI5OlLGoFUMhmoSc5wgri4n8QIoydUYrX8dYlJ1EjfBn0pkoz+oMCTHsIK0DGXwt4226bhO84YSUdYLtBamANfPfUzRvAv2rQ40GIUHLxV9cMKH+/IC8986r7rpAoOoZCNa3JiXm9m1VyTKRowfssW/sY4YSVlTpihFYsYyWR+dRrwKLoD2s8e7CMCOvOz27LNHF/Z+BHna3yxxcOmFRoRJ7Ol4yxGpCQv2Ri7mTlR3f8JC66mtCnrxZzbVGHG3YXIg2XEpO4UfoYW7uTpiKDTY7GRwF/7Z3arHm1GO7+RZfMwTSxdL6WSA5+xSEHUDXPFCra+9sFyVvhAVKelD3C8KPqRVkEG92N59rTYR30mPT4KhampMOLGXyC84zgTcK9iqc=
+  on:
+    tags: true
+    repo: theopak/instalike
