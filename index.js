@@ -14,7 +14,7 @@ var options = {
   port: process.env.PORT || 7001,
   appRoot: __dirname,                           // required for swagger-node
   validateResponse: false,                      // swaggerValidator() default false
-  apiDocs: '/api/v0/swagger.json',              // swaggerUi() default '/api-docs'
+  apiDocs: '/swagger.json',              // swaggerUi() default '/api-docs'
   swaggerUi: '/docs',                           // swaggerUi() default '/docs'
   controllers: './api/controllers',             // swaggerRouter() default {}
   useStubs: env == 'development' ? true : false // swaggerRouter() default false
@@ -34,6 +34,10 @@ swaggerTools.initializeMiddleware(swaggerResource, function(middleware) {
     });
   }
 
+  // It's possible to serve the frontend as static files from this node.js instance.
+  app.use('/button', express.static('./dist/button'));
+  app.use('/demo', express.static('./dist'));
+
   // Connect swagger middleware. `swaggerMetadata` must come before any other swagger-tools middleware.
   app.use(middleware.swaggerMetadata()); // Interpret Swagger resources and attach metadata to request
   app.use(middleware.swaggerValidator()); // Validate Swagger requests
@@ -46,9 +50,6 @@ swaggerTools.initializeMiddleware(swaggerResource, function(middleware) {
       console.error(err);
     }
   });
-
-  // It's possible to serve the frontend as static files from this node.js instance.
-  app.use('/', express.static('./dist'));
 
   // Start server
   app.listen(options.port, function(err) {

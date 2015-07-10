@@ -47,7 +47,7 @@ var button  = document.getElementById('instalike');
 var icon    = document.getElementById('instalike--icon');
 var label   = document.getElementById('instalike--label-empty');
 var counter = document.getElementById('instalike--label-counter');
-var hash = params.thing.toString() || '0000';
+var hash = (params.thing || '0000').toString();
 var count = 0;
 
 /**
@@ -66,7 +66,7 @@ if(localStorage.getItem('liked_' + hash)) {
 /**
  * Load count from API.
  */
-fetch('/api/v0/' + hash)
+fetch('/' + hash)
   .then(function(response) { return response.json(); })
   .then(function(json)     { setCount(json['count']); })
   .catch(function(e)       { console.log('parsing failed', e); });
@@ -82,7 +82,7 @@ var handleLike = function(el) {
   icon.style.transform = 'scale(1.2)';
   icon.style.color = 'tomato';
   icon.id = 'instalike--icon-liked';
-  fetch('/api/v0/' + hash, { method: 'post' });
+  fetch('/' + hash, { method: 'post' });
   setCount(++count);
   setState(true);
   setTimeout(function() {

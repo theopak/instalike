@@ -8,7 +8,7 @@ var deploy = require('gulp-gh-pages');
 gulp.task('scripts', function() {
   return gulp.src(['public/**/*.js'])
     .pipe(concat({ path: 'min.js', stat: { mode: 0666 }}))
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('dist/button'));
 });
 
 gulp.task('styles', function () {
@@ -22,13 +22,13 @@ gulp.task('styles', function () {
 });
 
 gulp.task('html', function() {
-  return gulp.src('public/*.html')
+  return gulp.src('public/**/*.html')
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest('dist'))
 });
 
 gulp.task('copy:icons', function() {
-  return gulp.src('public/icons.*')
+  return gulp.src('public/**/icons.*')
     .pipe(gulp.dest('dist'))
 });
 

@@ -16,7 +16,6 @@ schemes:
   - http
 produces:
   - application/json
-basePath: /api/v0
 paths:
   /{thing}:
     x-swagger-router-controller: thing
