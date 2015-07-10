@@ -351,22 +351,24 @@ var params = (function () {
  * State is true or false.
  */
 var setState = function(liked) {
-  localStorage.setItem('liked_' + hash, liked ? true : false);
+  var state = liked ? true : false;
+  localStorage.setItem('liked_' + hash, state);
   icon.id = 'instalike--icon-liked';
+  return state;
 };
 
 /**
- * Count for the 'thing' at this hash
+ * Local count for the 'thing' at this hash.
  */
 var setCount = function(i) {
   if (i < 1) {
-    return
+    return 0;
   };
   localStorage.setItem('count_' + hash, i);
   counter.innerHTML = i;
   count = i;
   label.id = 'instalike--label';
-  fetch('/api/v0/' + hash, { method: 'post' });
+  return i;
 };
 
 /**
@@ -401,12 +403,17 @@ fetch('/api/v0/' + hash)
   .catch(function(e)       { console.log('parsing failed', e); });
 
 /**
- * Handle 'like' presses.
+ * Handle a 'like' button press:
+ *   - Send like to API.
+ *   - Update local count.
+ *   - Update local state press.
+ *   - Trigger animations.
  */
 var handleLike = function(el) {
   icon.style.transform = 'scale(1.2)';
   icon.style.color = 'tomato';
   icon.id = 'instalike--icon-liked';
+  fetch('/api/v0/' + hash, { method: 'post' });
   setCount(++count);
   setState(true);
   setTimeout(function() {
