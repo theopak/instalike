@@ -7,7 +7,6 @@ var server = require('../../../index');
 var baseUrl = 'http://localhost:7001/';
 var thingHash = 'thingHash';
 var deployment = {
-  'id': 0,
   'thing': thingHash,
   'count': 0
 };
@@ -30,7 +29,23 @@ describe("controllers", function() {
               throw err;
             }
             var body = res.body;
-            body.should.have.property('id', 0);
+            body.should.have.property('thing', thingHash);
+            body.should.have.property('count', 0);
+            done();
+        });
+      });
+    });
+
+    describe("PATCH /{thing}", function() {
+      it("Should not decrement below 0 the count for a Thing", function(done) {
+        request(baseUrl)
+          .patch(thingHash)
+          .set('Accept', 'application/json')
+          .end(function(err, res) {
+            if (err) {
+              throw err;
+            }
+            var body = res.body;
             body.should.have.property('thing', thingHash);
             body.should.have.property('count', 0);
             done();
@@ -64,7 +79,6 @@ describe("controllers", function() {
               throw err;
             }
             var body = res.body;
-            body.should.have.property('id', 0);
             body.should.have.property('thing', thingHash);
             body.should.have.property('count', 1);
             done();

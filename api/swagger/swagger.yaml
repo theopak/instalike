@@ -51,6 +51,20 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+    patch:
+      description: Unlike an entity and return the global count
+      operationId: unlike
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Thing"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 definitions:
   ErrorResponse:
     required:

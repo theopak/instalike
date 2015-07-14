@@ -4,6 +4,7 @@ var swaggerTools = require('swagger-tools');
 var fs = require('fs');
 var yaml = require('js-yaml');
 var express = require('express');
+var Redis = require('ioredis');
 
 var app = express();
 module.export = app;
@@ -11,10 +12,10 @@ module.export = app;
 // Configuration
 var env = app.get('env'); // Express `app.get('env')` defaults to 'development'.
 var options = {
-  port: process.env.PORT || 7001,
+  port: process.env.PORT || 8080,
   appRoot: __dirname,                           // required for swagger-node
   validateResponse: false,                      // swaggerValidator() default false
-  apiDocs: '/swagger.json',              // swaggerUi() default '/api-docs'
+  apiDocs: '/swagger.json',                     // swaggerUi() default '/api-docs'
   swaggerUi: '/docs',                           // swaggerUi() default '/docs'
   controllers: './api/controllers',             // swaggerRouter() default {}
   useStubs: env == 'development' ? true : false // swaggerRouter() default false

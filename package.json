@@ -1,6 +1,6 @@
 {
   "name": "instalike",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Embeddable like button for anything.",
   "keywords": [],
   "author": "Theodore X. Pak <mail@theopak.com> (http://theopak.com)",
@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/theopak/instalike/issues"
   },
-  "license": "Apache 2",
+  "license": "Apache License 2.0",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha -r should --recursive './test/**/*.js'",
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "express": "^4.12.3",
-    "ioredis": "^1.5.1",
+    "ioredis": "^1.6.1",
     "js-yaml": "^3.3.1",
     "jshint": "^2.8.0",
     "mocha": "^2.2.5",

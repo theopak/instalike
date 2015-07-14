@@ -1,20 +1,22 @@
-# Instalike [![Build Status](https://travis-ci.org/theopak/instalike.svg?branch=master)](https://travis-ci.org/theopak/instalike) [![npm version](https://badge.fury.io/js/instalike.svg)](http://badge.fury.io/js/instalike)
+[![Build Status](https://travis-ci.org/theopak/instalike.svg?branch=master)](https://travis-ci.org/theopak/instalike) [![npm version](https://badge.fury.io/js/instalike.svg)](http://badge.fury.io/js/instalike)
 
-The like button for anything. Heavily inspired by http://ghbtns.com (Github Star counts). Use these attractive, globally-aware, anonymous like buttons to measure interest and hold informal polls.
+# Instalike
+
+Add like buttons to your Node.js project! They're attractive, globally aware, and completely anonymous. Use them to hold informal polls and to impress your friends.
 
 ![preview.gif](preview.gif)
 
 
 # Usage
 
-Simply drop the `<iframe>` in your HTML, and specify a `THING` to keep track of. Thing names are case-sensitive and can contain any Unicode characters.
+Place the `<iframe>` into your HTML, and specify a `THING` to keep track of. Thing names are case-sensitive and can contain any Unicode characters.
 
 ```html
 <iframe src="//instalike.click/button/?thing=THING" frameborder="0" scrolling="0" width="140px" height="16px">
 </iframe>
 ```
 
-Please note that in this v0 release, **you must host the API yourself**.
+Please note that in this v0 release, **you must host the API yourself** using the provided vagrantfile.
 
 
 # Development
@@ -42,13 +44,25 @@ The `./public` directory contains all the source files:
 - **icons** — fontawesome minimal subset via http://icomoon.io.
 
 ```bash
-npm install
 npm install -g gulp
+npm install
 gulp default        # Build source into ./dist
-node .              # Serve ./dist on http://localhost:7001
+vagrant up          # Start Redis and Node. View demo at http://localhost:8080/demo/
 ```
 
-Here's an example of a call to the JSON API:
+Here's an example of calls to the JSON API:
+
+```
+GET /{thingName} HTTP/1.1
+Host: localhost
+Accept: application/json
+
+200 OK
+{
+  "thing": "{thingName}",
+  "count": 42
+}
+```
 
 ```
 POST /{thingName} HTTP/1.1
@@ -57,8 +71,19 @@ Accept: application/json
 
 200 OK
 {
-  "id": 12345,
   "thing": "{thingName}",
-  "count": 9000
+  "count": 43
+}
+```
+
+```
+PATCH /{thingName} HTTP/1.1
+Host: localhost
+Accept: application/json
+
+200 OK
+{
+  "thing": "{thingName}",
+  "count": 42
 }
 ```

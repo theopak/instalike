@@ -44,8 +44,6 @@ body {
   height: 1rem;
   line-height: 1rem;
   vertical-align: baseline;
-  /*background: #fafafa;*/
-  /*border-radius: 0.25rem;*/
   overflow: hidden;
   cursor: pointer;
 }
