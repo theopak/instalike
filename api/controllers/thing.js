@@ -1,7 +1,7 @@
 'use strict';
 
-var Redis = require('ioredis');
-var client = Redis();
+var app = require('../../index.js');
+var redisClient = app.get('redis');
 
 var count = [];
 
@@ -10,7 +10,7 @@ var count = [];
  */
 exports.getLikes = function(req, res, next) {
   var thing = req.swagger.params.thing.value;
-  client.get(thing, function (err, result) {
+  redisClient.get(thing, function (err, result) {
     next();
     return res.json({
       'thing': thing,
@@ -24,7 +24,7 @@ exports.getLikes = function(req, res, next) {
  */
 exports.like = function(req, res, next) {
   var thing = req.swagger.params.thing.value;
-  client.incr(thing, function(err, result) {
+  redisClient.incr(thing, function(err, result) {
     next();
     return res.json({
       'thing': thing,
@@ -38,7 +38,7 @@ exports.like = function(req, res, next) {
  */
 exports.unlike = function(req, res, next) {
   var thing = req.swagger.params.thing.value;
-  client.get(thing, function (err, result) {
+  redisClient.get(thing, function (err, result) {
     if (result <= 0) {
       next();
       return res.json({
@@ -46,7 +46,7 @@ exports.unlike = function(req, res, next) {
         'count': 0
       });
     }
-    client.decr(thing, function(err, result) {
+    redisClient.decr(thing, function(err, result) {
       next();
       return res.json({
         'thing': thing,

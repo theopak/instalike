@@ -4,10 +4,10 @@ var swaggerTools = require('swagger-tools');
 var fs = require('fs');
 var yaml = require('js-yaml');
 var express = require('express');
-var Redis = require('ioredis');
+var Redis = require('./lib/redis.js');
 
 var app = express();
-module.export = app;
+module.exports = app;
 
 // Configuration
 var env = app.get('env'); // Express `app.get('env')` defaults to 'development'.
@@ -18,26 +18,28 @@ var options = {
   apiDocs: '/swagger.json',                     // swaggerUi() default '/api-docs'
   swaggerUi: '/docs',                           // swaggerUi() default '/docs'
   controllers: './api/controllers',             // swaggerRouter() default {}
-  useStubs: env == 'development' ? true : false // swaggerRouter() default false
+  useStubs: env == 'development' ? true : false,// swaggerRouter() default false
+  redis: { host: '127.0.0.1' }                  // required for ./lib/redis.js
 };
 
 // Express.js server
+var redisClient = Redis.init(options.redis || {});
+app.set('redis', redisClient);
 var swaggerResource = yaml.safeLoad(fs.readFileSync('./api/swagger/swagger.yaml', 'utf-8'));
 swaggerTools.initializeMiddleware(swaggerResource, function(middleware) {
-  // Enable CORS for development purposes, but not in production
   if (env != 'production') {
-    console.log('CORS allowed (this option is enabled when node ENV is not production.');
+    // Enable CORS for development purposes, but not in production
+    console.info('CORS allowed (this option is enabled when node ENV is not production.');
     app.use(function(req, res, next) {
       res.header("Access-Control-Allow-Origin", "*");
       res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
       res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
       next();
     });
-  }
 
-  // It's possible to serve the frontend as static files from this node.js instance.
-  app.use('/button', express.static('./dist/button'));
-  app.use('/demo', express.static('./dist'));
+    // It's possible to serve the frontend as static files from this node.js instance
+    app.use('/', express.static('./dist'));
+  }
 
   // Connect swagger middleware. `swaggerMetadata` must come before any other swagger-tools middleware.
   app.use(middleware.swaggerMetadata()); // Interpret Swagger resources and attach metadata to request
