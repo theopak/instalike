@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/theopak/instalike/issues"
   },
-  "license": "Apache License 2.0",
+  "license": "Apache-2.0",
   "main": "index.js",
   "scripts": {
     "test": "MOCK_REDIS=true ./node_modules/.bin/mocha -r should --recursive './test/**/*.js'",

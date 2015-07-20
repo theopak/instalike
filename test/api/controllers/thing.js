@@ -4,7 +4,7 @@ var should = require('should');
 var request = require('supertest');
 var server = require('../../../index');
 
-var baseUrl = 'http://localhost:7001/';
+var baseUrl = 'http://localhost:8080/api/';
 var thingHash = 'thingHash';
 var deployment = {
   'thing': thingHash,
@@ -14,12 +14,7 @@ var deployment = {
 describe("controllers", function() {
   describe("thing", function() {
 
-    it('should exist', function(done) {
-      should.exist(server);
-      done();
-    });
-
-    describe("GET /{thing}", function() {
+    describe("GET /api/{thing}", function() {
       it("Should return a count of 0 for a new Thing", function(done) {
         request(baseUrl)
           .get(thingHash)
@@ -36,7 +31,7 @@ describe("controllers", function() {
       });
     });
 
-    describe("PATCH /{thing}", function() {
+    describe("PATCH /api/{thing}", function() {
       it("Should not decrement below 0 the count for a Thing", function(done) {
         request(baseUrl)
           .patch(thingHash)
@@ -53,7 +48,7 @@ describe("controllers", function() {
       });
     });
 
-    describe("POST /{thing}", function() {
+    describe("POST /api/{thing}", function() {
       it("Should increment the counter for a Thing", function(done) {
         request(baseUrl)
           .post(thingHash)
@@ -69,7 +64,7 @@ describe("controllers", function() {
       });
     });
 
-    describe("GET /{thing}", function() {
+    describe("GET /api/{thing}", function() {
       it("Should return an accurate count for an existing Thing", function(done) {
         request(baseUrl)
           .get(thingHash)

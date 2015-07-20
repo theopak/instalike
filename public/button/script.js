@@ -72,7 +72,7 @@ setLocalCount(localStorage.getItem('count_' + hash) || 0);
 /**
  * Update like count via the API.
  */
-fetch('/' + hash)
+fetch('/api/' + hash)
   .then(function(response) { return response.json(); })
   .then(function(json)     { setLocalCount(json['count']); })
   .catch(function(e)       { console.log('parsing failed', e); });
@@ -88,13 +88,13 @@ var handleClick = function(el) {
   if (localStorage.getItem('liked_' + hash) === 'true') {
     setLocalState(false);
     setLocalCount(count = count - 1);
-    fetch('/' + hash, { method: 'patch' });
+    fetch('/api/' + hash, { method: 'PATCH' });
   } else {
     icon.style.transform = 'scale(1.2)';
     icon.style.color = 'tomato';
     setLocalState(true);
     setLocalCount(count = count + 1);
-    fetch('/' + hash, { method: 'post' });
+    fetch('/api/' + hash, { method: 'post' });
     setTimeout(function() {
       icon.removeAttribute('style');
     }, 150);

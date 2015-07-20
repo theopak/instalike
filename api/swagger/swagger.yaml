@@ -2,8 +2,7 @@ swagger: "2.0"
 info:
   version: "0.0.0"
   title: instalike
-host: localhost:2001
-basePath: /
+basePath: /api/
 parameters:
   thing:
     name: thing
