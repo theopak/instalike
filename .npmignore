@@ -18,5 +18,7 @@ out/
 screenshot.png
 preview.gif
 Vagrantfile
-vagrant
+vagrant/
 provision.sh
+deploy_hooks/
+appspec.yml

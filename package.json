@@ -1,6 +1,6 @@
 {
   "name": "instalike",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Embeddable like button for anything.",
   "keywords": [],
   "author": "Theodore X. Pak <mail@theopak.com> (http://theopak.com)",
@@ -14,6 +14,7 @@
   "license": "Apache-2.0",
   "main": "index.js",
   "scripts": {
+    "start": "node .",
     "test": "MOCK_REDIS=true ./node_modules/.bin/mocha -r should --recursive './test/**/*.js'",
     "postinstall": "./node_modules/gulp/bin/gulp.js default"
   },

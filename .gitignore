@@ -37,5 +37,6 @@ data.sqlite3
 .vagrant/
 out/
 *.tgz
+*.rdb
 
 dist

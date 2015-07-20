@@ -9,7 +9,7 @@ Attractive, anonymous, globally-aware like buttons for anything. Simple embed an
 
 There are 2 ways you can use Instalike: with the public API, or as a self-hosted node package.
 
-### 1. Use the public API
+### Option 1: Use the public API
 
 Place the `<iframe>` into your HTML, and specify a `THING` to keep track of. (Thing names are case-sensitive and can contain any Unicode characters.) That's it! The http://instalike.click website will automatically use the public API to keep track of the like count for your "thing."
 
@@ -20,13 +20,25 @@ Place the `<iframe>` into your HTML, and specify a `THING` to keep track of. (Th
 
 API hosting provided by [Cimpress](http://cimpress.com). The API supports GET/POST/PATCH http://instalike.click/api/THING.
 
-### 2. Host the API yourself
+### Option 2: Host the API yourself
 
 Install the npm module if you want to host the API yourself. This is perfect for on-premesis enterprise installations.
 
 ```bash
-& sudo npm install -g gulp
+$ sudo npm install -g gulp
 $ npm install instalike
+$ redis-server & # or start it as a service
+$ npm start
+
+# Note: stop redis safely using redis-cli
+$ redis-cli
+127.0.0.1:6379> shutdown
+2002:M 20 Jul 16:50:13.137 # User requested shutdown...
+2002:M 20 Jul 16:50:13.137 * Saving the final RDB snapshot before exiting.
+2002:M 20 Jul 16:50:13.138 * DB saved on disk
+2002:M 20 Jul 16:50:13.138 # Redis is now ready to exit, bye bye...
+not connected> exit
+Job 1, 'redis-server &' has ended
 ```
 
 
@@ -45,7 +57,6 @@ Pull requests welcome. The tech stack is very simple:
   - Source is HTML + CSS3
   - Uses FontAwesome icons
   - Built by Gulp
-  - Hosted on gh-pages
 
 The `./public` directory contains all the source files:
 
@@ -58,8 +69,8 @@ The `./public` directory contains all the source files:
 Here are examples of calls to the JSON API:
 
 ```
-GET /{thingName} HTTP/1.1
-Host: api.instalike.click
+GET /api/{thingName} HTTP/1.1
+Host: instalike.click
 Accept: application/json
 
 200 OK
@@ -70,8 +81,8 @@ Accept: application/json
 ```
 
 ```
-POST /{thingName} HTTP/1.1
-Host: api.instalike.click
+POST /api/{thingName} HTTP/1.1
+Host: instalike.click
 Accept: application/json
 
 200 OK
@@ -82,8 +93,8 @@ Accept: application/json
 ```
 
 ```
-PATCH /{thingName} HTTP/1.1
-Host: api.instalike.click
+PATCH /api/{thingName} HTTP/1.1
+Host: instalike.click
 Accept: application/json
 
 200 OK
