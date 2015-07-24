@@ -94,7 +94,7 @@ var handleClick = function(el) {
     icon.style.color = 'tomato';
     setLocalState(true);
     setLocalCount(count = count + 1);
-    fetch('/api/' + hash, { method: 'post' });
+    fetch('/api/' + hash, { method: 'POST' });
     setTimeout(function() {
       icon.removeAttribute('style');
     }, 150);
