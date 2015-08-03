@@ -34,18 +34,26 @@ body {
   background: transparent;
 }
 
-#instalike {
+#instalike-left,
+#instalike-right {
   display: inline-block;
   position: absolute;
   left: 0;
+  right: 0;
   bottom: 0;
   margin: 0 auto;
-  padding: 0 0.25rem;
+  padding: 0;
   height: 1rem;
+  text-align: left;
   line-height: 1rem;
   vertical-align: baseline;
   overflow: hidden;
   cursor: pointer;
+}
+
+#instalike-right {
+  left: auto;
+  text-align: right;
 }
 
 #instalike--icon,
@@ -61,8 +69,7 @@ body {
   left: 0;
   top: 0;
   padding: 0;
-  padding-left: 0.1rem;
-  width: 2em;
+  width: 1em;
   font-size: 1.2em;
   text-align: center;
   color: #aaa;
@@ -70,23 +77,29 @@ body {
   transition: transform 250ms cubic-bezier(0.68, -.5, 0.265, 3), color 50ms ease-out;
 }
 
+#instalike-right #instalike--icon,
+#instalike-right #instalike--icon-liked {
+  left: auto;
+  right: 0;
+}
 
-#instalike:hover #instalike--icon {
+
+span:hover #instalike--icon {
   color: #666;
 }
 
-#instalike:hover #instalike--icon-liked {
+span:hover #instalike--icon-liked {
   color: #cc1f00;
 }
 
-#instalike:active #instalike--icon,
-#instalike:active #instalike--icon-liked,
+span:active #instalike--icon,
+span:active #instalike--icon-liked,
 #instalike--icon-liked {
   color: tomato;
 }
 
-#instalike:active #instalike--icon,
-#instalike:active #instalike--icon-liked {
+span:active #instalike--icon,
+span:active #instalike--icon-liked {
   transform: scale(0.9);
 }
 
@@ -111,12 +124,18 @@ body {
 #instalike--label {
   position: relative;
   display: inline-block;
-  margin: 0.05rem 0 0.05rem 1.5rem;
+  margin: 0.05rem 0 0.05rem 1.5em;
   padding: 0;
   color: #333; /* #337ab7 */
   line-height: 0.8rem;
   font-weight: normal;
   white-space: nowrap;
+}
+
+#instalike-right #instalike--label {
+  right: 0;
+  margin-left: 0;
+  margin-right: 1.5em;
 }
 
 #instalike--label-empty {

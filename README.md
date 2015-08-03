@@ -11,10 +11,10 @@ There are 2 ways you can use Instalike: with the public API, or as a self-hosted
 
 ### Option 1: Use the public API
 
-Place the `<iframe>` into your HTML, and specify a `THING` to keep track of. (Thing names are case-sensitive and can contain any Unicode characters.) That's it! The http://instalike.click website will automatically use the public API to keep track of the like count for your "thing."
+Place the `<iframe>` into your HTML, and specify a `THING` to keep track of. (Thing names are case-sensitive and can contain any Unicode characters.) That's it! The http://instalike.click website will automatically use the public API to keep track of the like count for your "thing." Optionally, you can specify `align=right` to make the button right-aligned (default is left-aligned).
 
 ```html
-<iframe src="//instalike.click/button/?thing=THING" frameborder="0" scrolling="0" width="140px" height="16px">
+<iframe src="//instalike.click/button/?thing=THING&align=left" frameborder="0" scrolling="0" width="140px" height="20px">
 </iframe>
 ```
 
