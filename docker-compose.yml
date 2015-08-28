@@ -1,0 +1,10 @@
+web:
+    build: .
+    links:
+        - data:redis
+    ports:
+        - "8089"
+data:
+    image: redis
+    ports:
+        - "6379"

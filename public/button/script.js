@@ -72,7 +72,7 @@ var label   = document.getElementById('instalike--label-empty');
 var counter = document.getElementById('instalike--label-counter');
 var hash = (params.thing || '0000').toString();
 var count = 0;
-setRenderMode(button, params.align.toString() || 'left');
+setRenderMode(button, (params.align || '').toString() || 'left');
 
 /**
  * Use localStorage to load the state and cached like count so that they

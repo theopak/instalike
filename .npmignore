@@ -22,3 +22,6 @@ vagrant/
 provision.sh
 deploy_hooks/
 appspec.yml
+Dockerfile
+docker-compose.yml
+*.rdb
