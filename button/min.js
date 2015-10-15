@@ -348,6 +348,22 @@ var params = (function () {
 }());
 
 /**
+ * Set the layout to render as one of:
+ * align: left (default) | right
+ */
+var setRenderMode = function(target, align) {
+  var name = target.id;
+  if (align[0] == 'l') {
+    name = 'instalike-left'
+  } else if (align[0] == 'r') {
+    name = 'instalike-right'
+  } else {
+    name = 'instalike-left';
+  }
+  target.id = name;
+}
+
+/**
  * State 'didLike' is true or false. Local state of the like for this
  * 'Thing' hash prevents additional likes from POST-ing to the API.
  */
@@ -381,12 +397,13 @@ var setLocalCount = function(i) {
 /**
  * Elements and state vars.
  */
-var button  = document.getElementById('instalike');
+var button  = document.getElementById('instalike-left');
 var icon    = document.getElementById('instalike--icon');
 var label   = document.getElementById('instalike--label-empty');
 var counter = document.getElementById('instalike--label-counter');
 var hash = (params.thing || '0000').toString();
 var count = 0;
+setRenderMode(button, (params.align || '').toString() || 'left');
 
 /**
  * Use localStorage to load the state and cached like count so that they
@@ -425,7 +442,7 @@ var handleClick = function(el) {
     icon.style.color = 'tomato';
     setLocalState(true);
     setLocalCount(count = count + 1);
-    fetch('/api/' + hash, { method: 'post' });
+    fetch('/api/' + hash, { method: 'POST' });
     setTimeout(function() {
       icon.removeAttribute('style');
     }, 150);
