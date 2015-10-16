@@ -397,6 +397,7 @@ var setLocalCount = function(i) {
 /**
  * Elements and state vars.
  */
+var baseUrl = 'https://api.instalike.click/';
 var button  = document.getElementById('instalike-left');
 var icon    = document.getElementById('instalike--icon');
 var label   = document.getElementById('instalike--label-empty');
@@ -420,7 +421,7 @@ setLocalCount(localStorage.getItem('count_' + hash) || 0);
 /**
  * Update like count via the API.
  */
-fetch('/api/' + hash)
+fetch(baseUrl + hash)
   .then(function(response) { return response.json(); })
   .then(function(json)     { setLocalCount(json['count']); })
   .catch(function(e)       { console.log('parsing failed', e); });
@@ -436,13 +437,13 @@ var handleClick = function(el) {
   if (localStorage.getItem('liked_' + hash) === 'true') {
     setLocalState(false);
     setLocalCount(count = count - 1);
-    fetch('/api/' + hash, { method: 'PATCH' });
+    fetch(baseUrl + hash, { method: 'PATCH' });
   } else {
     icon.style.transform = 'scale(1.2)';
     icon.style.color = 'tomato';
     setLocalState(true);
     setLocalCount(count = count + 1);
-    fetch('/api/' + hash, { method: 'POST' });
+    fetch(baseUrl + hash, { method: 'POST' });
     setTimeout(function() {
       icon.removeAttribute('style');
     }, 150);
